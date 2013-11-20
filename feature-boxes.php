@@ -38,7 +38,7 @@ class Feature_Boxes {
 		);
 
 		$field = 'slug';
-		if( intval( $category ) ) {
+		if ( intval( $category ) ) {
 			$field = 'id';
 		}
 
@@ -57,12 +57,12 @@ class Feature_Boxes {
 		);
 
 		$boxes = array();
-		foreach( $boxes_query->posts as $box_key => $box_data ) {
+		foreach ( $boxes_query->posts as $box_key => $box_data ) {
 			$box = array();
 
-			if( $title != 'false' && $title && $title != 'true' && $title != 1 ) {
+			if ( $title != 'false' && $title && $title != 'true' && $title != 1 ) {
 				$box['title'] = $title;
-			} else if( $title != 'false' ) {
+			} else if ( $title != 'false' ) {
 				$box['title'] = $box_data->post_title;
 			} else {
 				$box['title'] = '';
@@ -79,10 +79,10 @@ class Feature_Boxes {
 
 		$contents = "<ul class=\"{$class}\" id=\"{$id}\">\n";
 
-		foreach( $boxes as $box ) {
+		foreach ( $boxes as $box ) {
 			$contents .= "\t<li>\n";
 
-			if( !empty( $title ) ) {
+			if ( !empty( $title ) ) {
 				$contents .= "\t\t<span class=\"{$class}_title\">\n";
 				$contents .= "\t\t\t{$box['title']}\n";
 				$contents .= "\t\t</span>\n";
