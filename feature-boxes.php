@@ -10,17 +10,31 @@
  */
 
 class Feature_Boxes {
+	const PADDING = 2;
+
 	public function __construct() {
+		add_action( 'wp_enqueue_scripts', array( get_class(), 'do_style' ) );
+
 		add_shortcode( 'feature_boxes', array( get_class(), 'do_feature_boxes' ) );
 	}
+	public static function do_style() {
+		wp_enqueue_style(
+			get_class(),
+			plugins_url( '/style/feature-boxes.css', __FILE__ )
+		);
+	}
 	public static function do_feature_boxes( $atts ) {
-
-		$boxes = self::get_boxes( $atts );
 
 		$class = get_class();
 		$id    = get_class() . '_' . $atts['category'];
 
-		return self::get_contents( $class, $id, $boxes );
+		$boxes = self::get_boxes( $atts );
+
+		$box_count = count( $boxes );
+		$box_width = floor( ( 95 - ( self::PADDING * 2 * $box_count ) ) / $box_count );
+		$box_style = "width: {$box_width}%;\n";
+
+		return self::get_contents( $class, $id, $box_style, $boxes );
 	}
 	public static function get_boxes( $atts ) {
 
@@ -75,12 +89,12 @@ class Feature_Boxes {
 
 		return $boxes;
 	}
-	public static function get_contents( $class, $id, $boxes = array() ) {
+	public static function get_contents( $class, $id, $box_style, $boxes = array() ) {
 
 		$contents = "<ul class=\"{$class}\" id=\"{$id}\">\n";
 
 		foreach ( $boxes as $box ) {
-			$contents .= "\t<li>\n";
+			$contents .= "\t<li style=\"{$box_style}\">\n";
 
 			if ( !empty( $title ) ) {
 				$contents .= "\t\t<span class=\"{$class}_title\">\n";

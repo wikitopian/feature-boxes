@@ -1,0 +1,24 @@
+ul.Feature_Boxes {
+	list-style-type: none;
+}
+
+ul.Feature_Boxes > li {
+	display: inline-block;
+
+	padding-left:  2%;
+	padding-right: 2%;
+
+	width: 28%;
+
+	vertical-align: top;
+}
+
+ul.Feature_Boxes > li > span.Feature_Boxes_title {
+	display: block;
+	font-weight: bold;
+	text-align: center;
+}
+
+ul.Feature_Boxes > li > span.Feature_Boxes_contents {
+
+}
