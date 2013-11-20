@@ -96,7 +96,7 @@ class Feature_Boxes {
 		foreach ( $boxes as $box ) {
 			$contents .= "\t<li style=\"{$box_style}\">\n";
 
-			if ( !empty( $title ) ) {
+			if ( !empty( $box['title'] ) ) {
 				$contents .= "\t\t<span class=\"{$class}_title\">\n";
 				$contents .= "\t\t\t{$box['title']}\n";
 				$contents .= "\t\t</span>\n";
