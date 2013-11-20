@@ -17,6 +17,10 @@ class Feature_Boxes {
 
 		$boxes = self::get_boxes( $atts );
 
+		$class = get_class();
+		$id    = get_class() . '_' . $atts['category'];
+
+		return self::get_contents( $class, $id, $boxes );
 	}
 	public static function get_boxes( $atts ) {
 
@@ -64,12 +68,36 @@ class Feature_Boxes {
 				$box['title'] = '';
 			}
 
-			$box['content'] = $box_data->post_content;
+			$box['contents'] = $box_data->post_content;
 
 			$boxes[] = $box;
 		}
 
 		return $boxes;
+	}
+	public static function get_contents( $class, $id, $boxes = array() ) {
+
+		$contents = "<ul class=\"{$class}\" id=\"{$id}\">\n";
+
+		foreach( $boxes as $box ) {
+			$contents .= "\t<li>\n";
+
+			if( !empty( $title ) ) {
+				$contents .= "\t\t<span class=\"{$class}_title\">\n";
+				$contents .= "\t\t\t{$box['title']}\n";
+				$contents .= "\t\t</span>\n";
+			}
+
+			$contents .= "\t\t<span class=\"{$class}_contents\">\n";
+			$contents .= "\t\t\t{$box['contents']}\n";
+			$contents .= "\t\t</span>\n";
+
+			$contents .= "\t</li>\n";
+		}
+
+		$contents .= "\n</ul>\n";
+
+		return $contents;
 	}
 }
 $feature_boxes = new Feature_Boxes();
